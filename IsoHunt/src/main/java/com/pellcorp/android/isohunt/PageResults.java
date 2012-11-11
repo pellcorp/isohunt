@@ -12,7 +12,7 @@ public class PageResults {
 	public PageResults() {
 	}
 	
-	public void addResult(Result result) {
+	void addResult(Result result) {
 		searchResults.add(result);
 	}
 	
@@ -20,7 +20,7 @@ public class PageResults {
 		return currentPage;
 	}
 
-	public void setCurrentPage(int currentPage) {
+	void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
 
@@ -28,7 +28,7 @@ public class PageResults {
 		return numberOfPages;
 	}
 
-	public void setNumberOfPages(int numberOfPages) {
+	void setNumberOfPages(int numberOfPages) {
 		this.numberOfPages = numberOfPages;
 	}
 

@@ -8,9 +8,9 @@ import org.junit.Test;
 
 public class SearchResultParserTest {
 	@Test
-	public void testResults() throws Exception {
+	public void testFirstPageResults() throws Exception {
 		SearchResultParser parser = new SearchResultParser();
-		Document doc = Jsoup.parse(ResourceUtils.loadResourceAsString("/search-results.html"));
+		Document doc = Jsoup.parse(ResourceUtils.loadResourceAsString("/search-results-p1.html"));
 		PageResults pageResults = parser.parseResults(doc);
 		assertEquals(1, pageResults.getCurrentPage());
 		assertEquals(8, pageResults.getNumberOfPages());
@@ -48,5 +48,26 @@ public class SearchResultParserTest {
 		assertEquals("34.64 GB", ninthResult.getSize().toString());
 		assertEquals(4, ninthResult.getSeeders());
 		assertEquals(57, ninthResult.getLeeches());
+	}
+	
+	@Test
+	public void testResultWithNoRating() throws Exception {
+		SearchResultParser parser = new SearchResultParser();
+		Document doc = Jsoup.parse(ResourceUtils.loadResourceAsString("/search-results-p2.html"));
+		PageResults pageResults = parser.parseResults(doc);
+		assertEquals(2, pageResults.getCurrentPage());
+		assertEquals(8, pageResults.getNumberOfPages());
+		assertEquals(20, pageResults.getSearchResults().size());
+		
+		Result fourthResult = pageResults.getSearchResults().get(3);
+		assertEquals(Category.TV, fourthResult.getCategory());
+		assertEquals("212396113", fourthResult.getId());
+		assertEquals("113.1w", fourthResult.getAge().toString());
+		assertEquals("Doctor Who Season 5", fourthResult.getTitle());
+		assertNull(fourthResult.getRating().getRating());
+		assertEquals(0, fourthResult.getRating().getCommentCount());
+		assertEquals("1.87 GB", fourthResult.getSize().toString());
+		assertEquals(14, fourthResult.getSeeders());
+		assertEquals(4, fourthResult.getLeeches());
 	}
 }

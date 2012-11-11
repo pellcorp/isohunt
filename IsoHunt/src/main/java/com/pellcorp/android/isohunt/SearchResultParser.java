@@ -86,9 +86,16 @@ public class SearchResultParser {
 	
 	private Rating parseRating(Element titleCell) {
 		List<TextNode> textNodes = titleCell.select("a").first().textNodes();
-		String rating = textNodes.get(0).text(); // rating text
-		String comments = textNodes.get(1).text();
-		return new Rating(rating, parseInt(comments.trim()));
+		if (textNodes.size() > 1) {
+			String rating = textNodes.get(0).text(); // rating text
+			String comments = textNodes.get(1).text();
+			return new Rating(rating, parseInt(comments.trim()));
+		} else if (textNodes.size() > 0) {
+			String comments = textNodes.get(0).text();
+			return new Rating(null, parseInt(comments.trim()));
+		} else {
+			return new Rating(null, 0);
+		}
 	}
 	
 	private void updatePageDetails(PageResults results, Document doc) {
