@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 public class IsoHuntSearchResultsReceiver extends BroadcastReceiver {
-	public static final String SEARCH_RESULTS_DOWNLOADED =
+	public static final String ACTION_SEARCH_RESULTS_DOWNLOADED =
 		      "com.pellcorp.android.transact.action.SEARCH_RESULTS_DOWNLOADED";
 	
 	private final Receiver receiver;
@@ -23,7 +23,8 @@ public class IsoHuntSearchResultsReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		@SuppressWarnings("unchecked")
-		PageResults results = (PageResults) intent.getSerializableExtra(IsoHuntSearchService.SEARCH_RESULTS);
+		PageResults results = (PageResults) 
+			intent.getSerializableExtra(IsoHuntSearchService.SEARCH_RESULTS);
 		receiver.onReceive(results);
 	}
 }

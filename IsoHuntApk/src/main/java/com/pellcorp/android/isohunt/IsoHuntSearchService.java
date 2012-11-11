@@ -1,5 +1,7 @@
 package com.pellcorp.android.isohunt;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,14 +28,19 @@ public class IsoHuntSearchService extends IntentService {
 	
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		PageQuery pageQuery = (PageQuery) intent.getSerializableExtra(SEARCH_QUERY);
-		IsoHuntSearch search = new IsoHuntSearch(searchProvider, pageQuery.getQuery());
-		search.nextPage();
-		
 		Intent broadcastIntent = new Intent();
-		broadcastIntent.setAction(IsoHuntSearchResultsReceiver.SEARCH_RESULTS_DOWNLOADED);
+		broadcastIntent.setAction(IsoHuntSearchResultsReceiver.ACTION_SEARCH_RESULTS_DOWNLOADED);
 		broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
-		broadcastIntent.putExtra(SEARCH_RESULTS, usage);
+		
+		try {
+			PageQuery pageQuery = (PageQuery) intent.getSerializableExtra(SEARCH_QUERY);
+			IsoHuntSearch search = new IsoHuntSearch(searchProvider);
+			PageResults results = search.search(pageQuery);
+			broadcastIntent.putExtra(SEARCH_RESULTS, results);
+		} catch (IOException e) {
+			// FIXME - pass error messages back!
+			broadcastIntent.putExtra(SEARCH_RESULTS, new PageResults());
+		}
 		sendBroadcast(broadcastIntent);
 	}
 }
