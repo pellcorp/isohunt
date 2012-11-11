@@ -30,7 +30,7 @@ public class SearchResultParser {
 			Elements rowCells = row.select("td");
 			
 			Result result = new Result();
-			result.setCategory(valueOf(rowCells.get(CATEGORY_IDX).text()));
+			result.setCategory(parseCategory(rowCells.get(CATEGORY_IDX).text()));
 			result.setAge(new Age(rowCells.get(AGE_IDX).text()));
 			result.setSize(new Size(rowCells.get(SIZE_IDX).text()));
 			result.setSeeders(parseInt(rowCells.get(SEEDERS_IDX).text()));
@@ -46,19 +46,30 @@ public class SearchResultParser {
 		return results;
 	}
 	
-	private Category valueOf(String category) {
-		try {
-			return Category.valueOf(category);
-		} catch (Exception e) { 
-			return null;
-		}
-	}
+	
 	
 	private Integer parseInt(String value) {
 		try {
 			return Integer.parseInt(value);
 		} catch (NumberFormatException e) {
 			return 0;
+		}
+	}
+	
+	private Category parseCategory(String category) {
+		for (Category categoryEnum : Category.values()) {
+			if (category.length() >= categoryEnum.name().length()) {
+				return valueOf(category.substring(0, categoryEnum.name().length()));
+			}
+		}
+		return Category.UNKNOWN;
+	}
+	
+	private Category valueOf(String category) {
+		try {
+			return Category.valueOf(category);
+		} catch (Exception e) { 
+			return null;
 		}
 	}
 	
