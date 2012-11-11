@@ -46,8 +46,6 @@ public class SearchResultParser {
 		return results;
 	}
 	
-	
-	
 	private Integer parseInt(String value) {
 		try {
 			return Integer.parseInt(value);
