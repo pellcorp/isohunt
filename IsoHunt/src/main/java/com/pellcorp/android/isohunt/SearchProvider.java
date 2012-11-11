@@ -5,5 +5,5 @@ import java.io.IOException;
 import org.jsoup.nodes.Document;
 
 public interface SearchProvider {
-	Document searchResults(String query, int page) throws IOException;
+	Document searchResults(PageQuery query) throws IOException;
 }

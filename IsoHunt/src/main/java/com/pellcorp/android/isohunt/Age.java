@@ -1,12 +1,14 @@
 package com.pellcorp.android.isohunt;
 
+import java.io.Serializable;
+
 /**
  * Keep it simple for now
  * 
  * @author jason
  *
  */
-public class Age {
+public class Age implements Serializable {
 	private String value;
 	
 	/**

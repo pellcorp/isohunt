@@ -1,6 +1,8 @@
 package com.pellcorp.android.isohunt;
 
-public class Result {
+import java.io.Serializable;
+
+public class Result implements Serializable {
 	private String id;
 	private Category category;
 	private Age age;

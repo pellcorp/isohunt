@@ -24,24 +24,26 @@ public class SearchResultParser {
 		PageResults results = new PageResults();
 		updatePageDetails(results, doc);
 		
-		Elements table = doc.select("table[id=serps]").select("tr[class=hlRow]");
-		List<Element> rowList = table.subList(1, table.size());
-		for (Element row : rowList) {
-			Elements rowCells = row.select("td");
-			
-			Result result = new Result();
-			result.setCategory(parseCategory(rowCells.get(CATEGORY_IDX).text()));
-			result.setAge(new Age(rowCells.get(AGE_IDX).text()));
-			result.setSize(new Size(rowCells.get(SIZE_IDX).text()));
-			result.setSeeders(parseInt(rowCells.get(SEEDERS_IDX).text()));
-			result.setLeeches(parseInt(rowCells.get(LEECHERS_IDX).text()));
-			
-			Element titleCell = rowCells.get(TITLE_IDX);
-			result.setRating(parseRating(titleCell));
-			result.setId(parseId(titleCell.select("a").first().attr("href")));
-			result.setTitle(titleCell.select("a").last().text());
-			
-			results.addResult(result);
+		if (results.getCurrentPage() > 0) {
+			Elements table = doc.select("table[id=serps]").select("tr[class=hlRow]");
+			List<Element> rowList = table.subList(1, table.size());
+			for (Element row : rowList) {
+				Elements rowCells = row.select("td");
+				
+				Result result = new Result();
+				result.setCategory(parseCategory(rowCells.get(CATEGORY_IDX).text()));
+				result.setAge(new Age(rowCells.get(AGE_IDX).text()));
+				result.setSize(new Size(rowCells.get(SIZE_IDX).text()));
+				result.setSeeders(parseInt(rowCells.get(SEEDERS_IDX).text()));
+				result.setLeeches(parseInt(rowCells.get(LEECHERS_IDX).text()));
+				
+				Element titleCell = rowCells.get(TITLE_IDX);
+				result.setRating(parseRating(titleCell));
+				result.setId(parseId(titleCell.select("a").first().attr("href")));
+				result.setTitle(titleCell.select("a").last().text());
+				
+				results.addResult(result);
+			}
 		}
 		return results;
 	}

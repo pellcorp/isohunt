@@ -23,10 +23,10 @@ public class SearchProviderImpl implements SearchProvider {
 	public static final String DOWNLOAD_LOCATION = "/torrents/";
 	
 	@Override
-	public Document searchResults(String query, int page) throws IOException {
+	public Document searchResults(PageQuery query) throws IOException {
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("ihq", query));
-		params.add(new BasicNameValuePair("ihp", page + ""));
+		params.add(new BasicNameValuePair("ihq", query.getQuery()));
+		params.add(new BasicNameValuePair("ihp", query.getPage() + ""));
 		return getHtmlPage(SEARCH_LOCATION, params);
 	}
 

@@ -1,13 +1,14 @@
 package com.pellcorp.android.isohunt;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PageResults {
+public class PageResults implements Serializable {
 	private List<Result> searchResults = new ArrayList<Result>();
-	private int currentPage;
-	private int numberOfPages;
+	private int currentPage = 0;
+	private int numberOfPages = 0;
 	
 	public PageResults() {
 	}

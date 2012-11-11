@@ -1,5 +1,7 @@
 package com.pellcorp.android.isohunt;
 
-public enum Category {
+import java.io.Serializable;
+
+public enum Category implements Serializable {
 	TV, UNKNOWN
 }

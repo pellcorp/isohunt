@@ -1,6 +1,8 @@
 package com.pellcorp.android.isohunt;
 
-public class Rating {
+import java.io.Serializable;
+
+public class Rating implements Serializable {
 	private final String rating;
 	private final int commentCount;
 	
