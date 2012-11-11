@@ -1,11 +1,4 @@
-Search page - results in test.html
-
 http://isohunt.com/torrents/?ihq=doctor+who+season+5
-
-Then just look for /download/############ which is the torrent URL which can be passed to 
-a bit torrent client directly.
-
-/download/255808857
 
 http://isohunt.com/download/255808857
 

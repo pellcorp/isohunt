@@ -18,6 +18,7 @@ public class SearchResultParserTest {
 		
 		Result firstResult = pageResults.getSearchResults().get(0);
 		assertEquals(Category.TV, firstResult.getCategory());
+		assertEquals("199226013", firstResult.getId());
 		assertEquals("120.6w", firstResult.getAge().toString());
 		assertEquals("Doctor Who 2005 Season 1-5", firstResult.getTitle());
 		assertEquals("+7", firstResult.getRating().getRating());
@@ -28,6 +29,7 @@ public class SearchResultParserTest {
 		
 		Result fifthResult = pageResults.getSearchResults().get(4);
 		assertEquals(Category.TV, fifthResult.getCategory());
+		assertEquals("29210293", fifthResult.getId());
 		assertEquals("285.6w", fifthResult.getAge().toString());
 		assertEquals("The First Five Doctors", fifthResult.getTitle());
 		assertEquals("+6", fifthResult.getRating().getRating());
@@ -38,6 +40,7 @@ public class SearchResultParserTest {
 		
 		Result ninthResult = pageResults.getSearchResults().get(8);
 		assertEquals(Category.TV, ninthResult.getCategory());
+		assertEquals("409623153", ninthResult.getId());
 		assertEquals("10.2w", ninthResult.getAge().toString());
 		assertEquals("Complete Doctor Who Series 2005 - 2011", ninthResult.getTitle());
 		assertEquals("+1", ninthResult.getRating().getRating());

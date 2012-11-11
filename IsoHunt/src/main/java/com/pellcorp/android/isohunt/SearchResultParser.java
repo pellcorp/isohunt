@@ -38,7 +38,7 @@ public class SearchResultParser {
 			
 			Element titleCell = rowCells.get(TITLE_IDX);
 			result.setRating(parseRating(titleCell));
-			result.setId(parseId(titleCell.select("a").last().attr("href")));
+			result.setId(parseId(titleCell.select("a").first().attr("href")));
 			result.setTitle(titleCell.select("a").last().text());
 			
 			results.addResult(result);
